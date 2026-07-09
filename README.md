@@ -71,6 +71,52 @@ A web application built with React, Tailwind CSS, shadcn/ui, and Express.
 | ------ | ------------- | ------------------------- |
 | GET    | `/api/health` | Returns server health status |
 
+## Setting Up the GitHub MCP Server
+
+The [GitHub MCP Server](https://github.com/github/github-mcp-server) gives Claude Code direct access to GitHub — creating issues, opening PRs, searching repositories, and more — all from within your coding session.
+
+### Prerequisites
+
+- Claude Code CLI installed
+- A [GitHub Personal Access Token (PAT)](https://github.com/settings/personal-access-tokens/new) with `repo` scope
+
+### Installation
+
+Run this command in your terminal, replacing `YOUR_GITHUB_PAT` with your actual token:
+
+```bash
+claude mcp add-json github '{"type":"http","url":"https://api.githubcopilot.com/mcp","headers":{"Authorization":"Bearer YOUR_GITHUB_PAT"}}'
+```
+
+**Tip:** To avoid hardcoding your token, store it in a `.env` file and reference it via an environment variable:
+
+```bash
+# Add to .env (make sure .env is in .gitignore)
+GITHUB_PAT=your_token_here
+
+# Then run:
+export GITHUB_PAT="$(grep '^GITHUB_PAT=' .env | cut -d '=' -f2-)"
+claude mcp add-json github '{"type":"http","url":"https://api.githubcopilot.com/mcp","headers":{"Authorization":"Bearer '"$GITHUB_PAT"'"}}'
+```
+
+### Verification
+
+After setup, restart Claude Code and verify the server is connected:
+
+```bash
+claude mcp list
+```
+
+You should see `github` listed as a configured MCP server.
+
+### Troubleshooting
+
+- Verify your PAT has `repo` scope and hasn't expired
+- Check configuration with `claude mcp list`
+- If problems persist, remove and reconfigure: `claude mcp remove github`
+
+For the full installation guide, see the [official docs](https://github.com/github/github-mcp-server/blob/main/docs/installation-guides/install-claude.md).
+
 ## Adding shadcn/ui Components
 
 ```bash
