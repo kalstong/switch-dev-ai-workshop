@@ -1,3 +1,15 @@
+---
+name: review-pull-request
+description: >
+  Review a GitHub pull request — read the diff, check it against the linked issue,
+  and produce a structured review with findings and a verdict.
+  Use this skill whenever the user wants to review a PR, check a PR's changes,
+  or says things like "review PR #X", "check this PR", "what do you think of this PR",
+  "look at this pull request", "review the open PRs", or "can you review my changes".
+  Also trigger after a PR has just been created and the user wants a quick sanity check
+  before requesting human review.
+---
+
 # Review Pull Request
 
 Review GitHub pull requests for the `kalstong/switch-dev-ai-workshop` repository.
