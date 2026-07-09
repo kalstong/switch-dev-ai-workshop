@@ -71,6 +71,53 @@ A web application built with React, Tailwind CSS, shadcn/ui, and Express.
 | ------ | ------------- | ------------------------- |
 | GET    | `/api/health` | Returns server health status |
 
+## Setting Up the GitHub CLI (`gh`)
+
+Claude Code uses the [GitHub CLI](https://cli.github.com/) (`gh`) under the hood for many GitHub operations — creating PRs, viewing issues, managing releases, etc. Install it and authenticate before using Claude Code with GitHub.
+
+### Installation
+
+**macOS (Homebrew):**
+
+```bash
+brew install gh
+```
+
+**Windows (winget):**
+
+```bash
+winget install --id GitHub.cli
+```
+
+**Linux (apt):**
+
+```bash
+(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
+  && sudo mkdir -p -m 755 /etc/apt/keyrings \
+  && out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  && cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+  && sudo apt update \
+  && sudo apt install gh -y
+```
+
+For other platforms, see the [official installation docs](https://github.com/cli/cli#installation).
+
+### Authentication
+
+After installing, log in to your GitHub account:
+
+```bash
+gh auth login
+```
+
+Follow the interactive prompts to authenticate via browser or token. Once complete, verify with:
+
+```bash
+gh auth status
+```
+
 ## Setting Up the GitHub MCP Server
 
 The [GitHub MCP Server](https://github.com/github/github-mcp-server) gives Claude Code direct access to GitHub — creating issues, opening PRs, searching repositories, and more — all from within your coding session.
